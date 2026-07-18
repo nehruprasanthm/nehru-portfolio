@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nehru Prasanth M — Junior Cyber Security Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A121C;
+    --bg-alt:#0D1826;
+    --panel:#101E2E;
+    --panel-2:#0D1927;
+    --line:#1E3550;
+    --line-soft:#152741;
+    --ink:#E7EEF5;
+    --ink-dim:#8DA2B8;
+    --ink-faint:#5A7086;
+    --copper:#E3993C;
+    --copper-dim:#8A5F26;
+    --teal:#4FD1C5;
+    --teal-dim:#2C6B65;
+    --alert:#E4634F;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.6;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:48px 48px;
+    background-attachment:fixed;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+  ::selection{background:var(--copper);color:#0A121C;}
+
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+  a{color:inherit;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+
+  /* corner registration marks */
+  .crop{position:fixed;width:18px;height:18px;pointer-events:none;z-index:40;opacity:.55;}
+  .crop::before,.crop::after{content:"";position:absolute;background:var(--ink-faint);}
+  .crop::before{width:18px;height:1px;top:50%;}
+  .crop::after{width:1px;height:18px;left:50%;}
+  .crop.tl{top:14px;left:14px;} .crop.tr{top:14px;right:14px;}
+  .crop.bl{bottom:14px;left:14px;} .crop.br{bottom:14px;right:14px;}
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:30;
+    background:rgba(10,18,28,.86);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .navbar{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;max-width:1120px;margin:0 auto;}
+  .navbar .id{font-size:13px;letter-spacing:.08em;color:var(--ink-dim);}
+  .navbar .id b{color:var(--ink);}
+  nav ul{list-style:none;display:flex;gap:28px;}
+  nav a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none;transition:color .2s;}
+  nav a:hover{color:var(--copper);}
+  .navtoggle{display:none;background:none;border:1px solid var(--line);color:var(--ink);width:36px;height:36px;font-family:'IBM Plex Mono';}
+  @media (max-width:760px){
+    nav ul{display:none;}
+    .navtoggle{display:block;}
+    nav.open ul{
+      display:flex;flex-direction:column;position:absolute;top:56px;right:32px;
+      background:var(--panel);border:1px solid var(--line);padding:16px;gap:14px;
+    }
+  }
+
+  /* SHEET LABEL (section header) */
+  .sheet-label{display:flex;align-items:baseline;gap:14px;margin-bottom:36px;}
+  .sheet-label .num{font-family:'IBM Plex Mono';color:var(--copper);font-size:13px;letter-spacing:.06em;}
+  .sheet-label h2{font-family:'IBM Plex Mono';font-size:clamp(20px,3vw,28px);text-transform:uppercase;letter-spacing:.04em;font-weight:600;}
+  .sheet-label .rule{flex:1;height:1px;background:var(--line);}
+
+  section{padding:96px 0;position:relative;}
+  section:not(.hero)+section::before{
+    content:"";position:absolute;top:0;left:0;right:0;
+  }
+
+  /* HERO */
+  .hero{
+    min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+    padding-top:120px;padding-bottom:60px;position:relative;
+  }
+  .hero .eyebrow{
+    font-family:'IBM Plex Mono';color:var(--teal);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .hero .eyebrow::before{content:"";width:7px;height:7px;background:var(--teal);border-radius:50%;box-shadow:0 0 0 3px rgba(79,209,197,.18);animation:pulse 2.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  h1.name{
+    font-family:'IBM Plex Mono';font-weight:700;
+    font-size:clamp(38px,7vw,72px);letter-spacing:-.01em;line-height:1.02;
+    text-transform:uppercase;
+  }
+  h1.name span{color:var(--copper);}
+  .role{
+    font-size:clamp(16px,2.2vw,20px);color:var(--ink-dim);margin-top:14px;max-width:560px;
+    font-family:'IBM Plex Mono';
+  }
+  .role .cursor{display:inline-block;width:9px;height:1em;background:var(--copper);vertical-align:-2px;animation:blink 1s step-end infinite;margin-left:2px;}
+  @keyframes blink{50%{opacity:0;}}
+  .lede{max-width:600px;margin-top:22px;color:var(--ink-dim);font-size:15.5px;}
+  .hero-contact{display:flex;flex-wrap:wrap;gap:22px;margin-top:32px;font-family:'IBM Plex Mono';font-size:13px;}
+  .hero-contact a{display:flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s,color .2s;}
+  .hero-contact a:hover{border-color:var(--copper);color:var(--copper);}
+  .hero-contact svg{width:14px;height:14px;stroke:var(--teal);}
+
+  .hero-diagram{margin-top:56px;}
+  .hero-diagram .cap{font-family:'IBM Plex Mono';font-size:11px;color:var(--ink-faint);letter-spacing:.08em;margin-bottom:10px;text-transform:uppercase;}
+  svg text{font-family:'IBM Plex Mono';}
+
+  /* PANEL */
+  .panel{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px 30px;position:relative;
+  }
+  .panel::before{
+    content:attr(data-tag);position:absolute;top:-10px;left:20px;background:var(--panel);
+    padding:0 8px;font-family:'IBM Plex Mono';font-size:10px;color:var(--ink-faint);letter-spacing:.14em;
+  }
+
+  /* SUMMARY */
+  .summary-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;}
+  @media (max-width:800px){.summary-grid{grid-template-columns:1fr;}}
+  .summary-grid p{color:var(--ink-dim);font-size:15.5px;}
+  .summary-grid p+p{margin-top:14px;}
+  .facts{display:flex;flex-direction:column;gap:0;}
+  .facts .fact{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line-soft);font-family:'IBM Plex Mono';font-size:13px;}
+  .facts .fact:last-child{border-bottom:none;}
+  .facts .fact span:first-child{color:var(--ink-faint);}
+  .facts .fact span:last-child{color:var(--ink);text-align:right;}
+
+  /* EXPERIENCE */
+  .job{position:relative;padding-left:28px;border-left:1px solid var(--line);margin-bottom:52px;}
+  .job:last-child{margin-bottom:0;}
+  .job::before{content:"";position:absolute;left:-5px;top:4px;width:9px;height:9px;background:var(--bg);border:2px solid var(--copper);border-radius:50%;}
+  .job-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-bottom:6px;}
+  .job-head h3{font-size:19px;font-weight:600;}
+  .job-head .period{font-family:'IBM Plex Mono';font-size:12px;color:var(--teal);white-space:nowrap;}
+  .job-org{font-family:'IBM Plex Mono';font-size:12.5px;color:var(--ink-faint);margin-bottom:16px;}
+  .job ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .job li{position:relative;padding-left:20px;color:var(--ink-dim);font-size:14.5px;}
+  .job li::before{content:"›";position:absolute;left:0;color:var(--copper);font-family:'IBM Plex Mono';}
+
+  /* PROJECTS */
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  @media (max-width:800px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{background:var(--panel);border:1px solid var(--line);padding:26px;display:flex;flex-direction:column;gap:14px;}
+  .proj-card h3{font-size:17px;font-weight:600;}
+  .proj-card .status{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--line);width:fit-content;color:var(--ink-faint);}
+  .proj-card .status.active{color:var(--teal);border-color:var(--teal-dim);}
+  .proj-card .status.done{color:var(--copper);border-color:var(--copper-dim);}
+  .proj-card p{color:var(--ink-dim);font-size:14.5px;}
+  .progress{height:5px;background:var(--line-soft);border-radius:3px;overflow:hidden;margin-top:4px;}
+  .progress > div{height:100%;background:linear-gradient(90deg,var(--teal-dim),var(--teal));width:78%;}
+  .proj-meta{font-family:'IBM Plex Mono';font-size:11px;color:var(--ink-faint);}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  @media (max-width:800px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-group{border:1px solid var(--line);padding:22px 24px;background:var(--panel-2);}
+  .skill-group h4{font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:16px;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{font-family:'IBM Plex Mono';font-size:12.5px;padding:6px 11px;border:1px solid var(--line);color:var(--ink-dim);border-radius:2px;transition:border-color .2s,color .2s;}
+  .chip:hover{border-color:var(--copper);color:var(--ink);}
+  .chip.dim{color:var(--ink-faint);border-style:dashed;}
+
+  /* EDUCATION */
+  .edu-row{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line-soft);flex-wrap:wrap;}
+  .edu-row:last-child{border-bottom:none;}
+  .edu-row .left h3{font-size:15.5px;font-weight:600;}
+  .edu-row .left p{font-family:'IBM Plex Mono';font-size:12px;color:var(--ink-faint);margin-top:2px;}
+  .edu-row .right{font-family:'IBM Plex Mono';font-size:13px;color:var(--ink-dim);text-align:right;white-space:nowrap;}
+
+  /* CERTS */
+  .cert-row{display:flex;align-items:center;gap:16px;padding:16px 20px;border:1px solid var(--line);background:var(--panel);margin-bottom:10px;}
+  .cert-row svg{width:18px;height:18px;stroke:var(--copper);flex-shrink:0;}
+  .cert-row .t{font-size:14.5px;}
+  .cert-row .d{font-family:'IBM Plex Mono';font-size:11.5px;color:var(--ink-faint);margin-top:2px;}
+
+  /* CONTACT / FOOTER */
+  footer{padding:90px 0 60px;border-top:1px solid var(--line);margin-top:40px;}
+  .contact-cta{text-align:center;max-width:600px;margin:0 auto;}
+  .contact-cta h2{font-family:'IBM Plex Mono';font-size:clamp(24px,4vw,34px);text-transform:uppercase;letter-spacing:.02em;}
+  .contact-cta p{color:var(--ink-dim);margin-top:14px;font-size:15px;}
+  .contact-links{display:flex;justify-content:center;gap:16px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono';font-size:13px;letter-spacing:.04em;text-decoration:none;
+    padding:13px 24px;border:1px solid var(--copper);color:var(--copper);
+    display:inline-flex;align-items:center;gap:8px;transition:background .2s,color .2s;
+  }
+  .btn:hover{background:var(--copper);color:#0A121C;}
+  .btn.ghost{border-color:var(--line);color:var(--ink-dim);}
+  .btn.ghost:hover{border-color:var(--teal);color:var(--teal);background:none;}
+  .foot-meta{text-align:center;margin-top:70px;font-family:'IBM Plex Mono';font-size:11px;color:var(--ink-faint);letter-spacing:.06em;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="crop tl"></div><div class="crop tr"></div><div class="crop bl"></div><div class="crop br"></div>
+
+<header>
+  <div class="navbar">
+    <div class="id mono"><b>NEHRU PRASANTH M</b> · SEC-DWG-01</div>
+    <nav id="nav">
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="navtoggle mono" id="navtoggle" aria-label="Toggle menu">≡</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Erode, Tamil Nadu · Open to Cyber Security / SOC / OT-ICS roles</div>
+    <h1 class="name">Nehru Prasanth <span>M</span></h1>
+    <div class="role">Junior Cyber Security Analyst<span class="cursor"></span></div>
+    <p class="lede">Engineering-trained defender who reads a network the way an electrical engineer reads a circuit — from packet captures and subnet plans through to access-control failures. Cybersecurity training from Aenexz Tech, layered on a B.E. in Electrical &amp; Electronics Engineering.</p>
+
+    <div class="hero-contact">
+      <a href="mailto:nehruregalyasri@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg>
+        nehruregalyasri@gmail.com
+      </a>
+      <a href="tel:+917604843447">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 3a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.2-1.3a2 2 0 0 1 2.1-.5c1 .4 2 .6 3 .7a2 2 0 0 1 1.7 2z"/></svg>
+        +91 76048 43447
+      </a>
+      <a href="#" onclick="return false;">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Erode, Tamil Nadu
+      </a>
+    </div>
+
+    <div class="hero-diagram reveal">
+      <div class="cap">Fig. 1 — Segmented network design exercise, VLSM subnetting on a /24 block</div>
+      <svg viewBox="0 0 900 300" width="100%" style="max-width:900px;overflow:visible">
+        <!-- core -->
+        <rect x="380" y="130" width="140" height="44" rx="2" fill="#101E2E" stroke="#E3993C" stroke-width="1.4"/>
+        <text x="450" y="148" fill="#E7EEF5" font-size="11" text-anchor="middle">CORE SWITCH</text>
+        <text x="450" y="162" fill="#8DA2B8" font-size="9" text-anchor="middle">192.168.1.0 /24</text>
+
+        <!-- branches -->
+        <g stroke="#1E3550" stroke-width="1.4" fill="none">
+          <path id="p1" d="M450,130 L450,80 L120,80 L120,45"/>
+          <path id="p2" d="M450,130 L450,80 L340,80 L340,45"/>
+          <path id="p3" d="M450,174 L450,225 L340,225 L340,258"/>
+          <path id="p4" d="M450,174 L450,225 L120,225 L120,258"/>
+        </g>
+
+        <!-- nodes -->
+        <g font-size="9.5">
+          <rect x="55" y="10" width="130" height="40" rx="2" fill="#0D1826" stroke="#4FD1C5" stroke-width="1.2"/>
+          <text x="120" y="26" fill="#E7EEF5" font-size="10.5" text-anchor="middle">SERVERS</text>
+          <text x="120" y="40" fill="#4FD1C5" text-anchor="middle">10.0.1.0/26</text>
+
+          <rect x="275" y="10" width="130" height="40" rx="2" fill="#0D1826" stroke="#4FD1C5" stroke-width="1.2"/>
+          <text x="340" y="26" fill="#E7EEF5" font-size="10.5" text-anchor="middle">FINANCE</text>
+          <text x="340" y="40" fill="#4FD1C5" text-anchor="middle">10.0.1.64/27</text>
+
+          <rect x="275" y="258" width="130" height="40" rx="2" fill="#0D1826" stroke="#4FD1C5" stroke-width="1.2"/>
+          <text x="340" y="274" fill="#E7EEF5" font-size="10.5" text-anchor="middle">HR</text>
+          <text x="340" y="288" fill="#4FD1C5" text-anchor="middle">10.0.1.96/27</text>
+
+          <rect x="55" y="258" width="130" height="40" rx="2" fill="#0D1826" stroke="#4FD1C5" stroke-width="1.2"/>
+          <text x="120" y="274" fill="#E7EEF5" font-size="10.5" text-anchor="middle">USER DEVICES</text>
+          <text x="120" y="288" fill="#4FD1C5" text-anchor="middle">10.0.1.128/28</text>
+        </g>
+
+        <!-- animated packets -->
+        <circle r="3.2" fill="#E3993C"><animateMotion dur="3.2s" repeatCount="indefinite" path="M450,130 L450,80 L120,80 L120,45"/></circle>
+        <circle r="3.2" fill="#E3993C"><animateMotion dur="3.6s" begin="0.5s" repeatCount="indefinite" path="M450,130 L450,80 L340,80 L340,45"/></circle>
+        <circle r="3.2" fill="#E3993C"><animateMotion dur="3.4s" begin="1s" repeatCount="indefinite" path="M450,174 L450,225 L340,225 L340,258"/></circle>
+        <circle r="3.2" fill="#E3993C"><animateMotion dur="3.8s" begin="1.4s" repeatCount="indefinite" path="M450,174 L450,225 L120,225 L120,258"/></circle>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="summary">
+    <div class="sheet-label"><span class="num">01</span><h2>Professional Summary</h2><div class="rule"></div></div>
+    <div class="summary-grid reveal">
+      <div>
+        <p>Entry-level cybersecurity professional with a B.E. in Electrical &amp; Electronics Engineering and hands-on security training completed through Aenexz Tech Private Limited. Built a self-directed home lab to practice network security and Linux system administration outside of formal coursework.</p>
+        <p>The EEE background carries directly into security work — control systems and electrical fundamentals map naturally onto ICS/OT environments, making this a fit for both traditional IT security and industrial security roles. Prior experience validating data quality across AI/ML pipelines adds a habit of precision that transfers well to log review and threat-data analysis.</p>
+      </div>
+      <div class="panel" data-tag="QUICK FACTS">
+        <div class="facts">
+          <div class="fact"><span>Base discipline</span><span>Electrical &amp; Electronics Eng.</span></div>
+          <div class="fact"><span>Security training</span><span>Aenexz Tech Pvt. Ltd.</span></div>
+          <div class="fact"><span>Focus areas</span><span>Network sec · Linux · OT/ICS</span></div>
+          <div class="fact"><span>Home lab</span><span>In progress — Jul 2026</span></div>
+          <div class="fact"><span>Location</span><span>Erode, Tamil Nadu</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="sheet-label"><span class="num">02</span><h2>Professional Experience</h2><div class="rule"></div></div>
+
+    <div class="job reveal">
+      <div class="job-head">
+        <h3>Cyber Security Trainee</h3>
+        <span class="period">May 2026 — Present</span>
+      </div>
+      <div class="job-org">Aenexz Tech Private Limited · Erode, Tamil Nadu</div>
+      <ul>
+        <li>Diagnosed confidentiality gaps in live web traffic by capturing and analyzing HTTP, HTTPS, and DNS packets in Wireshark, confirming HTTP exposes credentials in plaintext while TLS/443 encrypts payload data.</li>
+        <li>Designed a segmented network for a simulated 4-department company by applying VLSM subnetting to a /24 block, calculating host ranges and subnet masks (/26, /27, /28) to isolate servers from user devices.</li>
+        <li>Built a reference framework of 20+ attack techniques (SQLi, XSS, CSRF, credential stuffing, SSRF), documenting mitigations such as parameterized queries, CSP, and MFA to support vulnerability identification.</li>
+        <li>Reconstructed a credential-theft incident over unencrypted Wi-Fi by mapping the attack chain to CIA/AAA framework failures, then investigated authentication artifacts on Linux (/etc/passwd, /etc/shadow) and Windows (Event Viewer) to identify brute-force indicators and least-privilege gaps.</li>
+      </ul>
+    </div>
+
+    <div class="job reveal">
+      <div class="job-head">
+        <h3>AI/ML Data Annotation Associate</h3>
+        <span class="period">Nov 2025 — Feb 2026</span>
+      </div>
+      <div class="job-org">Desicrew Solutions Private Limited · Erode, Tamil Nadu</div>
+      <ul>
+        <li>Completed initial role-specific training (Nov–Dec 2025) before moving into full production work on AI/ML annotation projects.</li>
+        <li>Annotated and validated data for machine learning training pipelines, maintaining accuracy and consistency against project quality standards.</li>
+        <li>Built strong attention-to-detail and structured data-handling habits, skills directly transferable to log review and threat-data analysis in security operations.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="sheet-label"><span class="num">03</span><h2>Projects</h2><div class="rule"></div></div>
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <span class="status active">In progress</span>
+        <h3>Cybersecurity Home Lab</h3>
+        <p>Self-directed, personally virtualized lab built to practice core cybersecurity skills — Linux configuration, network setup, and vulnerability testing — as a hands-on complement to formal training.</p>
+        <div class="progress"><div></div></div>
+        <div class="proj-meta">Target completion: July 2026</div>
+      </div>
+      <div class="proj-card">
+        <span class="status done">Patent filed</span>
+        <h3>College Employee Management System</h3>
+        <p>Final-year engineering project at Bannari Amman Institute of Technology. Designed and developed the system end to end and authored the full project report.</p>
+        <div class="proj-meta">Subsequently filed for a patent — 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sheet-label"><span class="num">04</span><h2>Technical Skills</h2><div class="rule"></div></div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <h4>Systems &amp; Scripting</h4>
+        <div class="chip-row">
+          <span class="chip">Linux (hands-on)</span>
+          <span class="chip">Windows</span>
+          <span class="chip dim">Python — in progress</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Security Fundamentals</h4>
+        <div class="chip-row">
+          <span class="chip">Network security basics</span>
+          <span class="chip">System hardening</span>
+          <span class="chip">Wireshark packet analysis</span>
+          <span class="chip">VLSM subnetting</span>
+          <span class="chip">Home-lab vulnerability practice</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Engineering Foundation</h4>
+        <div class="chip-row">
+          <span class="chip">Electrical &amp; Electronics Systems</span>
+          <span class="chip">Control Systems</span>
+          <span class="chip">ICS / OT security fit</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Other</h4>
+        <div class="chip-row">
+          <span class="chip">AI/ML data quality validation</span>
+          <span class="chip">Technical documentation</span>
+          <span class="chip">Attention to detail</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="sheet-label"><span class="num">05</span><h2>Education</h2><div class="rule"></div></div>
+    <div class="panel reveal" data-tag="ACADEMIC RECORD">
+      <div class="edu-row">
+        <div class="left">
+          <h3>B.E., Electrical and Electronics Engineering</h3>
+          <p>Bannari Amman Institute of Technology</p>
+        </div>
+        <div class="right">2025</div>
+      </div>
+      <div class="edu-row">
+        <div class="left">
+          <h3>Higher Secondary (12th)</h3>
+          <p>Mangalam Matriculation School</p>
+        </div>
+        <div class="right">515 / 600 — 85.8%</div>
+      </div>
+      <div class="edu-row">
+        <div class="left">
+          <h3>Secondary (10th)</h3>
+          <p>Mangalam Matriculation School</p>
+        </div>
+        <div class="right">418 / 500 — 83.6%</div>
+      </div>
+    </div>
+
+    <div class="sheet-label" style="margin-top:60px;"><span class="num">06</span><h2>Certifications</h2><div class="rule"></div></div>
+    <div class="reveal">
+      <div class="cert-row">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6l-9-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div>
+          <div class="t">Cyber Security — Certificate of Completion</div>
+          <div class="d">Aenexz Tech Private Limited · May 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-cta reveal">
+      <h2>Let's talk security</h2>
+      <p>Open to junior analyst, SOC, and OT/ICS security roles. Happy to walk through the home lab, the subnetting exercise, or the incident reconstruction in more depth.</p>
+      <div class="contact-links">
+        <a class="btn" href="mailto:nehruregalyasri@gmail.com">Send an email →</a>
+        <a class="btn ghost" href="tel:+917604843447">Call +91 76048 43447</a>
+      </div>
+    </div>
+    <div class="foot-meta">SEC-DWG-01 · REV JUL-2026 · ERODE, TAMIL NADU</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('navtoggle').addEventListener('click', function(){
+    document.getElementById('nav').classList.toggle('open');
+  });
+  document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>{
+    document.getElementById('nav').classList.remove('open');
+  }));
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
